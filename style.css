@@ -50,6 +50,7 @@ button {
     background-color: white;
     border-radius: 10px;
     font-weight: 900;
+    border: 2px black solid;
 }
 
 .title, .author, .pages {
