@@ -57,3 +57,8 @@ button {
     display: flex;
     column-gap: 4px;
 }
+
+.status {
+    margin-top: 20px;
+    font-weight: 900;
+}
