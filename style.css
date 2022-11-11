@@ -44,13 +44,14 @@ header {
     box-shadow: 2px 2px 5px;
 }
 
-button {
+#add, #clear {
     padding: 5px 20px;
     font-size: 20px;
-    background-color: white;
+    background-color: black;
+    color: white;
     border-radius: 10px;
     font-weight: 900;
-    border: 2px black solid;
+    border: none;
 }
 
 .title, .author, .pages {
@@ -61,4 +62,46 @@ button {
 .status {
     margin-top: 20px;
     font-weight: 900;
+}
+
+form {
+    margin-bottom: 15px;
+    display: none;
+    max-width: 70%;
+    align-items: center;
+}
+
+label {
+    font-size: 20px;
+    margin-right: 3px;
+    font-weight: 900;
+}
+
+input {
+    margin-right: 20px;
+    border-radius: 5px;
+    border: 2px black solid;
+    height: 20px;
+}
+
+.submitForm, .closeForm {
+    padding: 5px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    font-weight: 900;
+    border: none;
+}
+
+.submitForm {
+    background-color: aquamarine;
+}
+
+.closeForm {
+    background-color: #f87171;
+}
+
+.formButtons {
+    display: none;
+    margin-bottom: 25px;
+    gap: 1rem;
 }
