@@ -86,9 +86,16 @@ document.querySelector('.submitForm').onclick = function(e) {
     let bookPages = document.getElementById('pages').value;
     let status = document.getElementById('status').value;
     
-    let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
-    addBook(bookUpload);
-    e.preventDefault();
+    if (bookTitle == '' || 
+        bookAuthor == '' ||
+        bookPages == '') {
+            alert('Please enter all book info to proceed');
+        } else {
+            let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
+            addBook(bookUpload);
+            e.preventDefault();
+        }
+
     
     if (document.querySelector('.bookshelf')) {
         document.querySelector('.bookshelf').innerHTML = '';
