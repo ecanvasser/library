@@ -77,6 +77,12 @@ label {
     font-weight: 900;
 }
 
+select {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 0 10px;
+}
+
 input {
     margin-right: 20px;
     border-radius: 5px;
