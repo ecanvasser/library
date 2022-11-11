@@ -1,5 +1,6 @@
 let myLib = [];
 
+// Main constructor for all Book instances
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -7,6 +8,7 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
+// Prototype method added to Book to share across all instances
 Book.prototype.info = function () {
     return `${this.title} by ${this.author}, ${this.pages}, pages, ${this.read}`;
 }
@@ -34,19 +36,20 @@ document.getElementById('clear').onclick = function() {
     myLib = [];
 }
 
+//Creates all the new cards for each book being added
 const addToMain = () => {
     
     for (i = 0; i < myLib.length; i++) {
         const div = document.createElement('div');
         document.querySelector('.bookshelf').appendChild(div).id = 'card'+i;
 
-        //Create card element
+        //Create card div
         const card = document.getElementById('card'+i);
         card.setAttribute('class', 'card');
         card.innerHTML = '<div class=title>Title:</div>';
         card.firstChild.setAttribute('id', 'title'+i);
 
-        //Create title parent and child
+        //Create title parent/child and card button parent div
         const titleParent = document.getElementById('title'+i);
         titleParent.innerHTML += '<div class=title-name></div>';
         titleParent.children[0].setAttribute('id', 'titlename'+i);
@@ -54,6 +57,7 @@ const addToMain = () => {
         titleParent.children[1].setAttribute('id', 'cardbtns'+i);
         titleParent.children[0].innerHTML = myLib[i].title;
 
+        //Set id and svg pictures for both card buttons
         const cardBtns = document.getElementById('cardbtns'+i);
         cardBtns.children[0].setAttribute('id', 'st'+i)
         cardBtns.children[1].setAttribute('id', i);
@@ -86,12 +90,14 @@ const addToMain = () => {
         (myLib[i].read == 'yes') ? document.getElementById('status'+i).innerHTML = 'Finished' : 
         document.getElementById('status'+i).innerHTML = 'Not Started';
 
+        //Changes the background color on card when book is first added to the grid
         if (document.getElementById('status'+i).innerHTML == 'Finished') {
             document.getElementById('card'+i).style.backgroundColor = '#7fffd4';
         } else {
             document.getElementById('card'+i).style.backgroundColor = '#f87171';
         }
 
+        //Event listener for status toggle. Updates Book object and status div
         cardBtns.children[0].addEventListener('click', function(e) {
             if (card.children[3].innerHTML == 'Finished') {
                 card.children[3].innerHTML = 'Not Started';
@@ -104,6 +110,7 @@ const addToMain = () => {
             }
         })
 
+        //Event listener for delete button. Removes individual cards as needed
         cardBtns.children[1].addEventListener('click', function(e) {
             myLib.splice(e.target.id, 1);
             document.querySelector('.bookshelf').innerHTML = '';
@@ -113,13 +120,14 @@ const addToMain = () => {
 
 }
 
-//Submit book button
+//Submit book button. Creates Book instance and manages content in main tag (i.e. bookshelf)
 document.querySelector('.submitForm').onclick = function(e) {
     let bookTitle = document.getElementById('title').value;
     let bookAuthor = document.getElementById('author').value;
     let bookPages = document.getElementById('pages').value;
     let status = document.getElementById('status').value;
     
+    //Throws basic alert if any fields are left blank and creates Book instance
     if (bookTitle == '' || 
         bookAuthor == '' ||
         bookPages == '') {
@@ -130,7 +138,7 @@ document.querySelector('.submitForm').onclick = function(e) {
             e.preventDefault();
         }
 
-    
+    //Wipes all content from bookshelf to prevent repeat book values being shown
     if (document.querySelector('.bookshelf').innerHTML != '') {
         document.querySelector('.bookshelf').innerHTML = '';
         addToMain();
@@ -138,5 +146,6 @@ document.querySelector('.submitForm').onclick = function(e) {
         addToMain();
     }
 
+    //Clears form input values after adding new book
     document.querySelectorAll('input').forEach(input => input.value = '');
 }
