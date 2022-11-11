@@ -52,7 +52,17 @@ const addToMain = () => {
         const titleParent = document.getElementById('title'+i);
         titleParent.innerHTML += '<div class=title-name></div>';
         titleParent.children[0].setAttribute('id', 'titlename'+i);
+        titleParent.innerHTML += '<div class=card-btns><button class=status-toggle></button><button class=card-delete></button></div>';
+        titleParent.children[1].setAttribute('id', 'cardbtns'+i);
         titleParent.children[0].innerHTML = myLib[i].title;
+
+        const cardBtns = document.getElementById('cardbtns'+i);
+        cardBtns.children[0].innerHTML = `<svg style="width:15px;height:15px" viewBox="0 0 24 24">
+        <path fill="white" d="M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z" />
+        </svg>`;
+        cardBtns.children[1].innerHTML = `<svg style="width:15px;height:15px" viewBox="0 0 24 24">
+        <path fill="white" d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
+        </svg>`;
 
         //Create author parent and child
         document.getElementById('title'+i).insertAdjacentHTML("afterend", '<div class=author>Author:</div>');
