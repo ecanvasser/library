@@ -22,3 +22,7 @@ document.getElementById('add').onclick = function() {
 }
 
 // Close Form button function
+document.querySelector('.closeForm').onclick = function() {
+    document.getElementById('bookForm').style.display = 'none';
+    document.querySelector('.formButtons').style.display = 'none';
+}
