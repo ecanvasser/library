@@ -91,6 +91,16 @@ const addToMain = () => {
         } else {
             document.getElementById('card'+i).style.backgroundColor = '#f87171';
         }
+
+        cardBtns.children[0].addEventListener('click', function() {
+            if (card.children[3].innerHTML == 'Finished') {
+                card.children[3].innerHTML = 'Not Started';
+                card.style.backgroundColor = '#f87171';
+            } else {
+                card.children[3].innerHTML = 'Finished';
+                card.style.backgroundColor = '#7fffd4';
+            }
+        })
     }
 
 }

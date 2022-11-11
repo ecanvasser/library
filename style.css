@@ -96,7 +96,6 @@ input {
     font-size: 20px;
     border-radius: 10px;
     font-weight: 900;
-    border: none;
 }
 
 .submitForm {
@@ -128,3 +127,7 @@ input {
     border-radius: 5px;
     size: 15px;
 }
+
+.status-toggle > svg {
+    pointer-events: ;
+  }
