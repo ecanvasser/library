@@ -36,7 +36,7 @@ document.getElementById('clear').onclick = function() {
 
 let shownBooks = document.querySelector('.bookshelf').children.length;
 
-const addToMain = (bookTitle, bookAuthor, bookPages, bookStatus) => {
+const addToMain = () => {
     
     for (i = 0; i < myLib.length; i++) {
         const div = document.createElement('div');
@@ -52,7 +52,7 @@ const addToMain = (bookTitle, bookAuthor, bookPages, bookStatus) => {
         const titleParent = document.getElementById('title'+i);
         titleParent.innerHTML += '<div class=title-name></div>';
         titleParent.children[0].setAttribute('id', 'titlename'+i);
-        titleParent.children[0].innerHTML = bookTitle;
+        titleParent.children[0].innerHTML = myLib[i].title;
 
         //Create author parent and child
         document.getElementById('title'+i).insertAdjacentHTML("afterend", '<div class=author>Author:</div>');
@@ -60,7 +60,7 @@ const addToMain = (bookTitle, bookAuthor, bookPages, bookStatus) => {
         const authorParent = document.getElementById('author'+i)
         authorParent.innerHTML += '<div class=author-name></div>';
         authorParent.children[0].setAttribute('id', 'authorname'+i);
-        authorParent.children[0].innerHTML = bookAuthor;
+        authorParent.children[0].innerHTML = myLib[i].author;
 
         //Create page count parent and child
         document.getElementById('author'+i).insertAdjacentHTML("afterend", '<div class=pages>Pages:</div>');
@@ -68,13 +68,19 @@ const addToMain = (bookTitle, bookAuthor, bookPages, bookStatus) => {
         const pagesParent = document.getElementById('pages'+i);
         pagesParent.innerHTML += '<div class=page-count></div>';
         pagesParent.children[0].setAttribute('id', 'pagecount'+i); 
-        pagesParent.children[0].innerHTML = bookPages;
+        pagesParent.children[0].innerHTML = myLib[i].pages;
 
         //Create status memo line
         document.getElementById('pages'+i).insertAdjacentHTML("afterend", '<div class=status></div>')
         card.children[3].setAttribute('id', 'status'+i);
-        (bookStatus == 'yes') ? document.getElementById('status'+i).innerHTML = 'Finished' : 
+        (myLib[i].read == 'yes') ? document.getElementById('status'+i).innerHTML = 'Finished' : 
         document.getElementById('status'+i).innerHTML = 'Not Started';
+
+        if (document.getElementById('status'+i).innerHTML == 'Finished') {
+            document.getElementById('card'+i).style.backgroundColor = '#7fffd4';
+        } else {
+            document.getElementById('card'+i).style.backgroundColor = '#f87171';
+        }
     }
 
 }
@@ -97,7 +103,7 @@ document.querySelector('.submitForm').onclick = function(e) {
         }
 
     
-    if (document.querySelector('.bookshelf')) {
+    if (document.querySelector('.bookshelf').innerHTML != '') {
         document.querySelector('.bookshelf').innerHTML = '';
         addToMain(bookTitle, bookAuthor, bookPages, status);
     } else {
