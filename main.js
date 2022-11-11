@@ -55,6 +55,7 @@ const addToMain = () => {
         titleParent.children[0].innerHTML = myLib[i].title;
 
         const cardBtns = document.getElementById('cardbtns'+i);
+        cardBtns.children[0].setAttribute('id', 'st'+i)
         cardBtns.children[1].setAttribute('id', i);
         cardBtns.children[0].innerHTML = `<svg style="width:15px;height:15px" viewBox="0 0 24 24">
         <path fill="white" d="M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z" />
@@ -91,13 +92,15 @@ const addToMain = () => {
             document.getElementById('card'+i).style.backgroundColor = '#f87171';
         }
 
-        cardBtns.children[0].addEventListener('click', function() {
+        cardBtns.children[0].addEventListener('click', function(e) {
             if (card.children[3].innerHTML == 'Finished') {
                 card.children[3].innerHTML = 'Not Started';
                 card.style.backgroundColor = '#f87171';
+                myLib[e.target.id.slice(-1)].read = 'no';
             } else {
                 card.children[3].innerHTML = 'Finished';
                 card.style.backgroundColor = '#7fffd4';
+                myLib[e.target.id.slice(-1)].read = 'yes';
             }
         })
 
