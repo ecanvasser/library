@@ -27,13 +27,23 @@ document.querySelector('.closeForm').onclick = function() {
     document.querySelector('.formButtons').style.display = 'none';
 }
 
+let shownBooks = document.querySelector('.bookshelf').children.length;
+
+const addToMain = () => {
+    const div = document.createElement('div');
+    let mainDiv = document.querySelector('.bookshelf').appendChild(div);
+    mainDiv.innerHTML = 'hi';
+}
+
 //Submit book button
-document.querySelector('.submitForm').onclick = function() {
-    let bookTitle = document.getElementById('title').value;
-    let bookAuthor = document.getElementById('author').value;
-    let bookPages = document.getElementById('pages').value;
-    let status = document.getElementById('status').value;
+document.querySelector('.submitForm').onclick = function(e) {
+    // let bookTitle = document.getElementById('title').value;
+    // let bookAuthor = document.getElementById('author').value;
+    // let bookPages = document.getElementById('pages').value;
+    // let status = document.getElementById('status').value;
     
-    let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
-    addBook(bookUpload);
+    // let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
+    // addBook(bookUpload);
+    e.preventDefault();
+    addToMain();
 }
