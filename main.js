@@ -95,4 +95,6 @@ document.querySelector('.submitForm').onclick = function(e) {
     } else {
         addToMain(bookTitle, bookAuthor, bookPages, status);
     }
+
+    document.querySelectorAll('input').forEach(input => input.value = '');
 }
