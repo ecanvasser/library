@@ -27,11 +27,16 @@ document.querySelector('.closeForm').onclick = function() {
     document.querySelector('.formButtons').style.display = 'none';
 }
 
+// Delete All button function
+document.getElementById('clear').onclick = function() {
+    document.querySelector('.bookshelf').innerHTML = '';
+    myLib = [];
+}
+
 let shownBooks = document.querySelector('.bookshelf').children.length;
 
 const addToMain = (bookTitle, bookAuthor, bookPages, bookStatus) => {
     
-    document.querySelector('.bookshelf').innerHTML = '';
     for (i = 0; i < myLib.length; i++) {
         const div = document.createElement('div');
         document.querySelector('.bookshelf').appendChild(div).id = 'card'+i;
@@ -83,5 +88,11 @@ document.querySelector('.submitForm').onclick = function(e) {
     let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
     addBook(bookUpload);
     e.preventDefault();
-    addToMain(bookTitle, bookAuthor, bookPages, status);
+    
+    if (document.querySelector('.bookshelf')) {
+        document.querySelector('.bookshelf').innerHTML = '';
+        addToMain(bookTitle, bookAuthor, bookPages, status);
+    } else {
+        addToMain(bookTitle, bookAuthor, bookPages, status);
+    }
 }
