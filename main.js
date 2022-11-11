@@ -25,6 +25,7 @@ document.getElementById('add').onclick = function() {
 document.querySelector('.closeForm').onclick = function() {
     document.getElementById('bookForm').style.display = 'none';
     document.querySelector('.formButtons').style.display = 'none';
+    document.querySelectorAll('input').forEach(input => input.value = '');
 }
 
 // Delete All button function
