@@ -26,3 +26,14 @@ document.querySelector('.closeForm').onclick = function() {
     document.getElementById('bookForm').style.display = 'none';
     document.querySelector('.formButtons').style.display = 'none';
 }
+
+//Submit book button
+document.querySelector('.submitForm').onclick = function() {
+    let bookTitle = document.getElementById('title').value;
+    let bookAuthor = document.getElementById('author').value;
+    let bookPages = document.getElementById('pages').value;
+    let status = document.getElementById('status').value;
+    
+    let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
+    addBook(bookUpload);
+}
