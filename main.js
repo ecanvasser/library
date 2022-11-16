@@ -194,7 +194,12 @@ class BookTiles {
     }
 
     submitForm() {
-        this.pushToLib();
+        if (document.querySelector('.bookshelf').innerHTML != '') {
+            document.querySelector('.bookshelf').innerHTML = '';
+            this.pushToLib();
+        } else {
+            this.pushToLib();
+        }
     }
 
     handleEvent() {
