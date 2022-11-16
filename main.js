@@ -43,13 +43,29 @@ class Form {
 }
 new Form();
 
+class tileButtons {
+    constructor() {
+        const delBtns = document.querySelectorAll('.card-delete');
+        delBtns.forEach(btn => btn.addEventListener('click', this));
+    }
+
+    delete(evt) {
+        myLib.splice(evt.target.id, 1);
+        evt.target.closest('.card').remove()
+    }
+
+    handleEvent(e) {
+        this.delete(e)
+    }
+}
+
 class BookTiles {
     constructor() {
         const submitBtn = document.querySelector('.submitForm');
         submitBtn.addEventListener('click', this);
     }
 
-    pushToLib() {
+    pushToLib = () => {
         let bookTitle = document.getElementById('title').value;
         let bookAuthor = document.getElementById('author').value;
         let bookPages = document.getElementById('pages').value;
@@ -64,6 +80,7 @@ class BookTiles {
             let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
             bookUpload.addBook(bookUpload)
         }
+        this.parentCard();
     }
 
     parentCard() {
@@ -71,6 +88,7 @@ class BookTiles {
             const div = document.createElement('div');
             document.querySelector('.bookshelf').appendChild(div).id = 'card'+i;
         }
+        this.titleParent();
     }
 
     titleParent() {
@@ -80,6 +98,7 @@ class BookTiles {
             card.innerHTML = '<div class=title>Title:</div>';
             card.firstChild.setAttribute('id', 'title'+i);
         }
+        this.titleChild();
     }
 
     titleChild() {
@@ -91,6 +110,7 @@ class BookTiles {
             titleParent.children[1].setAttribute('id', 'cardbtns'+i);
             titleParent.children[0].innerHTML = myLib[i].title;
         }
+        this.cardBtns();
     }
 
     cardBtns() {
@@ -106,6 +126,8 @@ class BookTiles {
             <path fill="white" d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
             </svg>`;
         }
+        this.authorDiv();
+        new tileButtons();
     }
 
     authorDiv() {
@@ -119,6 +141,7 @@ class BookTiles {
             authorParent.children[0].setAttribute('id', 'authorname'+i);
             authorParent.children[0].innerHTML = myLib[i].author;
         }
+        this.pageCount();
     }
 
     pageCount() {
@@ -132,6 +155,7 @@ class BookTiles {
             pagesParent.children[0].setAttribute('id', 'pagecount'+i); 
             pagesParent.children[0].innerHTML = myLib[i].pages;
         }
+        this.readStatus();
     }
 
     readStatus() {
@@ -152,13 +176,6 @@ class BookTiles {
 
     submitForm() {
         this.pushToLib();
-        this.parentCard();
-        this.titleParent();
-        this.titleChild();
-        this.cardBtns();
-        this.authorDiv();
-        this.pageCount();
-        this.readStatus();
     }
 
     handleEvent() {
@@ -166,22 +183,6 @@ class BookTiles {
     }
 }
 new BookTiles();
-
-class tileButtons {
-    constructor() {
-        const delBtns = document.querySelectorAll('.card-delete');
-        delBtns.forEach(btn => btn.addEventListener('click', this));
-    }
-
-    delete() {
-        alert('test')
-    }
-
-    handleEvent() {
-        this.delete()
-    }
-}
-new tileButtons();
 
 
 
