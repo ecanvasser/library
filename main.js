@@ -47,15 +47,34 @@ class tileButtons {
     constructor() {
         const delBtns = document.querySelectorAll('.card-delete');
         delBtns.forEach(btn => btn.addEventListener('click', this));
+
+        const statusBtns = document.querySelectorAll('.status-toggle');
+        statusBtns.forEach(btn => btn.addEventListener('click', this));
     }
 
-    delete(evt) {
-        myLib.splice(evt.target.id, 1);
-        evt.target.closest('.card').remove()
+    delete(e) {
+        myLib.splice(e.target.id, 1);
+        e.target.closest('.card').remove()
+    }
+
+    statusToggle(e) {
+        let idNum = e.target.id.slice(-1);
+        let statusDiv = document.querySelector('#status'+idNum);
+
+        if (statusDiv.innerHTML == 'Finished') {
+            e.target.closest('.card').style.backgroundColor = '#f87171';
+            statusDiv.innerHTML = 'Not Started';
+            myLib[e.target.id.slice(-1)].read = 'no';
+        } else {
+            e.target.closest('.card').style.backgroundColor = '#7fffd4';
+            statusDiv.innerHTML = 'Finished';
+            myLib[e.target.id.slice(-1)].read = 'yes';
+        }
+
     }
 
     handleEvent(e) {
-        this.delete(e)
+        (e.target.classList.contains('card-delete')) ? this.delete(e) : this.statusToggle(e)
     }
 }
 
