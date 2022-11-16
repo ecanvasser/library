@@ -1,27 +1,53 @@
 let myLib = [];
 
 // Main constructor for all Book instances
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+// function Book(title, author, pages, read) {
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.read = read;
+// }
+
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+    addBook(book) {
+        myLib.push(book);
+    }
 }
 
-// Prototype method added to Book to share across all instances
-Book.prototype.info = function () {
-    return `${this.title} by ${this.author}, ${this.pages}, pages, ${this.read}`;
+class Form {
+    constructor() {
+        const addBtn = document.getElementById('add');
+        addBtn.addEventListener('click', this)
+    }
+
+    _addBtn() {
+        document.getElementById('bookForm').style.display = 'flex';
+        document.querySelector('.formButtons').style.display = 'flex';
+    }
+
+    handleEvent(e) {
+        this._addBtn()
+    }
 }
 
-function addBook(book) {
-    myLib.push(book);
-}
+new Form();
+
+// function addBook(book) {
+//     myLib.push(book);
+// }
 
 // Add book button function
-document.getElementById('add').onclick = function() {
-    document.getElementById('bookForm').style.display = 'flex';
-    document.querySelector('.formButtons').style.display = 'flex';
-}
+// document.getElementById('add').onclick = function() {
+//     document.getElementById('bookForm').style.display = 'flex';
+//     document.querySelector('.formButtons').style.display = 'flex';
+// }
 
 // Close Form button function
 document.querySelector('.closeForm').onclick = function() {
@@ -120,7 +146,7 @@ const addToMain = () => {
 
 }
 
-//Submit book button. Creates Book instance and manages content in main tag (i.e. bookshelf)
+// Submit book button. Creates Book instance and manages content in main tag (i.e. bookshelf)
 document.querySelector('.submitForm').onclick = function(e) {
     let bookTitle = document.getElementById('title').value;
     let bookAuthor = document.getElementById('author').value;
@@ -148,4 +174,4 @@ document.querySelector('.submitForm').onclick = function(e) {
 
     //Clears form input values after adding new book
     document.querySelectorAll('input').forEach(input => input.value = '');
-}
+};
