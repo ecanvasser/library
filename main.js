@@ -24,7 +24,9 @@ class Book {
 class Form {
     constructor() {
         const addBtn = document.getElementById('add');
-        addBtn.addEventListener('click', this)
+        const closeBtn = document.querySelector('.closeForm');
+        addBtn.addEventListener('click', this);
+        closeBtn.addEventListener('click', this);
     }
 
     _addBtn() {
@@ -32,29 +34,22 @@ class Form {
         document.querySelector('.formButtons').style.display = 'flex';
     }
 
+    _closeBtn() {
+        document.getElementById('bookForm').style.display = 'none';
+        document.querySelector('.formButtons').style.display = 'none';
+        document.querySelectorAll('input').forEach(input => input.value = '');
+    }
+
     handleEvent(e) {
-        this._addBtn()
+        if (e.target.classList.contains('closeForm')) {
+            this._closeBtn()
+        } else {
+            this._addBtn()
+        }
     }
 }
 
 new Form();
-
-// function addBook(book) {
-//     myLib.push(book);
-// }
-
-// Add book button function
-// document.getElementById('add').onclick = function() {
-//     document.getElementById('bookForm').style.display = 'flex';
-//     document.querySelector('.formButtons').style.display = 'flex';
-// }
-
-// Close Form button function
-document.querySelector('.closeForm').onclick = function() {
-    document.getElementById('bookForm').style.display = 'none';
-    document.querySelector('.formButtons').style.display = 'none';
-    document.querySelectorAll('input').forEach(input => input.value = '');
-}
 
 // Delete All button function
 document.getElementById('clear').onclick = function() {
