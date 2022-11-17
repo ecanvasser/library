@@ -17,9 +17,11 @@ class Form {
     constructor() {
         const addBtn = document.getElementById('add');
         const closeBtn = document.querySelector('.closeForm');
+        const deleteAll = document.getElementById('clear');
 
         addBtn.addEventListener('click', this);
         closeBtn.addEventListener('click', this);
+        deleteAll.addEventListener('click', this);
     }
 
     _addBtn() {
@@ -33,11 +35,18 @@ class Form {
         document.querySelectorAll('input').forEach(input => input.value = '');
     }
 
+    _deleteAll() {
+        document.querySelector('.bookshelf').innerHTML = '';
+        myLib = [];
+    }
+
     handleEvent(e) {
         if (e.target.classList.contains('closeForm')) {
             this._closeBtn()
-        } else {
+        } else if (e.target.id == 'add') {
             this._addBtn()
+        } else {
+            this._deleteAll()
         }
     }
 }
