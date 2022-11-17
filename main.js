@@ -54,21 +54,23 @@ class tileButtons {
 
     delete(e) {
         myLib.splice(e.target.id, 1);
-        e.target.closest('.card').remove()
+        e.target.closest('.card').remove();
+        console.log(myLib)
     }
 
     statusToggle(e) {
         let idNum = e.target.id.slice(-1);
         let statusDiv = document.querySelector('#status'+idNum);
+        let titleName = document.querySelector('#titlename'+idNum).innerHTML;
 
         if (statusDiv.innerHTML == 'Finished') {
             e.target.closest('.card').style.backgroundColor = '#f87171';
             statusDiv.innerHTML = 'Not Started';
-            myLib[e.target.id.slice(-1)].read = 'no';
+            myLib.find(o => o.title == titleName).read = 'no';
         } else {
             e.target.closest('.card').style.backgroundColor = '#7fffd4';
             statusDiv.innerHTML = 'Finished';
-            myLib[e.target.id.slice(-1)].read = 'yes';
+            myLib.find(o => o.title == titleName).read = 'yes';
         }
 
     }
@@ -200,6 +202,7 @@ class BookTiles {
         } else {
             this.pushToLib();
         }
+        document.querySelectorAll('input').forEach(input => input.value = '');
     }
 
     handleEvent() {
@@ -207,7 +210,6 @@ class BookTiles {
     }
 }
 new BookTiles();
-
 
 
 // Delete All button function
