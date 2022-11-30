@@ -16,11 +16,13 @@ class Book {
 class Form {
     constructor() {
         const title = document.getElementById('title');
+        const author = document.getElementById('author');
         const addBtn = document.getElementById('add');
         const closeBtn = document.querySelector('.closeForm');
         const deleteAll = document.getElementById('clear');
 
         title.addEventListener('input', this);
+        author.addEventListener('input', this);
         addBtn.addEventListener('click', this);
         closeBtn.addEventListener('click', this);
         deleteAll.addEventListener('click', this);
@@ -42,12 +44,14 @@ class Form {
         myLib = [];
     }
 
-    titleInput() {
-        if (title.validity.tooShort) {
-            title.setCustomValidity('Enter longer title');
-            title.reportValidity();
+    invalidLength(target, id) {
+        if (target.validity.tooShort) {
+            target.setCustomValidity(`Enter longer ${id} value`);
+            target.reportValidity();
+            target.className = 'error';
         } else {
-            title.setCustomValidity('');
+            target.setCustomValidity('');
+            target.className = '';
         }
     }
 
@@ -56,8 +60,8 @@ class Form {
             this._closeBtn()
         } else if (e.target.id == 'add') {
             this._addBtn()
-        } else if (e.target.id == 'title') {
-            this.titleInput()
+        } else if (e.target.id == 'title' || e.target.id == 'author') {
+            this.invalidLength(e.target, e.target.id)
         } else {
             this._deleteAll()
         }

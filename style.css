@@ -55,9 +55,8 @@ header {
     border: none;
 }
 
-.title, .author, .pages {
-    display: flex;
-    column-gap: 4px;
+.error {
+    border: 2px #f87171 solid;
 }
 
 .status {
