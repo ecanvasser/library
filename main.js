@@ -15,10 +15,12 @@ class Book {
 
 class Form {
     constructor() {
+        const title = document.getElementById('title');
         const addBtn = document.getElementById('add');
         const closeBtn = document.querySelector('.closeForm');
         const deleteAll = document.getElementById('clear');
 
+        title.addEventListener('input', this);
         addBtn.addEventListener('click', this);
         closeBtn.addEventListener('click', this);
         deleteAll.addEventListener('click', this);
@@ -40,11 +42,22 @@ class Form {
         myLib = [];
     }
 
+    titleInput() {
+        if (title.validity.tooShort) {
+            title.setCustomValidity('Enter longer title');
+            title.reportValidity();
+        } else {
+            title.setCustomValidity('');
+        }
+    }
+
     handleEvent(e) {
         if (e.target.classList.contains('closeForm')) {
             this._closeBtn()
         } else if (e.target.id == 'add') {
             this._addBtn()
+        } else if (e.target.id == 'title') {
+            this.titleInput()
         } else {
             this._deleteAll()
         }
