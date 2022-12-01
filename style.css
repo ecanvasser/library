@@ -59,6 +59,10 @@ header {
     border: 2px #f87171 solid;
 }
 
+.success {
+    border: 2px #7fffd4 solid;
+}
+
 .status {
     margin-top: 20px;
     font-weight: 900;

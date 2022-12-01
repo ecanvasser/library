@@ -17,12 +17,14 @@ class Form {
     constructor() {
         const title = document.getElementById('title');
         const author = document.getElementById('author');
+        const pages = document.getElementById('pages');
         const addBtn = document.getElementById('add');
         const closeBtn = document.querySelector('.closeForm');
         const deleteAll = document.getElementById('clear');
 
         title.addEventListener('input', this);
         author.addEventListener('input', this);
+        pages.addEventListener('input', this);
         addBtn.addEventListener('click', this);
         closeBtn.addEventListener('click', this);
         deleteAll.addEventListener('click', this);
@@ -51,19 +53,32 @@ class Form {
             target.className = 'error';
         } else {
             target.setCustomValidity('');
-            target.className = '';
+            target.className = 'success';
+        }
+    }
+
+    pageNum() {
+        if (pages.validity.rangeUnderflow) {
+            pages.setCustomValidity('Enter a page count larger than 1')
+            pages.reportValidity();
+            pages.className = 'error';
+        } else {
+            pages.setCustomValidity('');
+            pages.className = 'success';
         }
     }
 
     handleEvent(e) {
         if (e.target.classList.contains('closeForm')) {
-            this._closeBtn()
+            this._closeBtn();
         } else if (e.target.id == 'add') {
-            this._addBtn()
+            this._addBtn();
         } else if (e.target.id == 'title' || e.target.id == 'author') {
             this.invalidLength(e.target, e.target.id)
+        } else if (e.target.id == 'pages') {
+            this.pageNum();
         } else {
-            this._deleteAll()
+            this._deleteAll();
         }
     }
 }
@@ -112,22 +127,31 @@ class BookTiles {
         submitBtn.addEventListener('click', this);
     }
 
+    formValidate() {
+        alert('test');
+        this.pushToLib()
+    }
+
     pushToLib = () => {
         let bookTitle = document.getElementById('title').value;
         let bookAuthor = document.getElementById('author').value;
         let bookPages = document.getElementById('pages').value;
         let status = document.getElementById('status').value;
+        
+        let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
+        bookUpload.addBook(bookUpload)
+        this.parentCard();
 
         //Throws basic alert if any fields are left blank and creates Book instance
-        if (bookTitle == '' || 
-        bookAuthor == '' ||
-        bookPages == '') {
-            alert('Please enter all book info to proceed');
-        } else {
-            let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
-            bookUpload.addBook(bookUpload)
-        }
-        this.parentCard();
+        // if (bookTitle == '' || 
+        // bookAuthor == '' ||
+        // bookPages == '') {
+        //     alert('Please enter all book info to proceed');
+        // } else {
+        //     let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
+        //     bookUpload.addBook(bookUpload)
+        // }
+        // this.parentCard();
     }
 
     parentCard() {
@@ -224,9 +248,9 @@ class BookTiles {
     submitForm() {
         if (document.querySelector('.bookshelf').innerHTML != '') {
             document.querySelector('.bookshelf').innerHTML = '';
-            this.pushToLib();
+            this.formValidate();
         } else {
-            this.pushToLib();
+            this.formValidate();
         }
         document.querySelectorAll('input').forEach(input => input.value = '');
     }
