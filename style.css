@@ -78,15 +78,23 @@ form {
 label {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 2px;
     font-size: 20px;
     margin-right: 3px;
     font-weight: 900;
 }
 
+.top-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
 span {
     font-size: 12px;
     color: #f87171;
-    margin: 0 auto;
+    min-height: 14px;
 }
 
 select {

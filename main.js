@@ -48,23 +48,27 @@ class Form {
 
     invalidLength(target, id) {
         if (target.validity.tooShort) {
-            target.setCustomValidity(`Enter longer ${id} value`);
-            target.reportValidity();
             target.className = 'error';
-        } else {
-            target.setCustomValidity('');
+            document.getElementById(`${id}Error`).textContent = `Enter longer ${id} value`;
+        } else if (target.validity.valid) {
+            document.getElementById(`${id}Error`).textContent = '';
             target.className = 'success';
+        } else {
+            target.className = '';
+            document.getElementById(`${id}Error`).textContent = '';
         }
     }
 
     pageNum() {
         if (pages.validity.rangeUnderflow) {
-            pages.setCustomValidity('Enter a page count larger than 1')
-            pages.reportValidity();
             pages.className = 'error';
-        } else {
-            pages.setCustomValidity('');
+            document.getElementById('pagesError').textContent = 'Enter a page count larger than 1';
+        } else if (pages.validity.valid) {
+            document.getElementById('pagesError').textContent = '';
             pages.className = 'success';
+        } else {
+            document.getElementById('pagesError').textContent = '';
+            pages.className = '';
         }
     }
 
@@ -129,7 +133,7 @@ class BookTiles {
 
     titleValidate() {
         if (!document.getElementById('title').validity.valid) {
-            document.getElementById('titleError').textContent = 'Enter valid title';
+            document.getElementById('titleError').textContent = 'Enter longer title value';
             this.authorValidate();
         } else {
             this.authorValidate();
@@ -138,7 +142,7 @@ class BookTiles {
 
     authorValidate() {
         if (!document.getElementById('author').validity.valid) {
-            document.getElementById('authorError').textContent = 'Enter valid author';
+            document.getElementById('authorError').textContent = 'Enter longer author value';
             this.pageValidate();
         } else {
             this.pageValidate();
@@ -147,14 +151,17 @@ class BookTiles {
 
     pageValidate() {
         if(!document.getElementById('pages').validity.valid) {
-            document.getElementById('pagesError').textContent = 'Enter valid page';
+            document.getElementById('pagesError').textContent = 'Enter a page count larger than 1';
         } else if (document.getElementById('title').validity.valid &&
                     document.getElementById('author').validity.valid &&
                     document.getElementById('pages').validity.valid) {
             this.pushToLib();
             document.getElementById('titleError').textContent = '';
+            document.getElementById('title').className = '';
             document.getElementById('authorError').textContent = '';
+            document.getElementById('author').className = '';
             document.getElementById('pagesError').textContent = '';
+            document.getElementById('pages').className = '';
         }
     }
 
