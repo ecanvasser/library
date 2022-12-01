@@ -16,18 +16,36 @@
         <button id="clear">Delete All</button>
     </div>
     <form id="bookForm" onsubmit="return false" novalidate>
-        <label for="title">Title:</label>
-        <input type="text" id="title" required minlength="2">
-        <span id="titleError"></span>
-        <label for="author">Author:</label>
-        <input type="text" id="author" required minlength="2">
-        <label for="pages">Pages:</label>
-        <input type="number" id="pages" required min="1">
-        <label for="status">Have you read it?</label>
-        <select name="status" id="status" required>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
+        <label for="title">
+            <div class="top-row">
+                Title
+                <input type="text" id="title" required minlength="2">
+            </div>
+            <span id="titleError"></span>
+        </label>
+        <label for="author">
+            <div class="top-row">
+                Author
+                <input type="text" id="author" required minlength="2">
+            </div>
+            <span id="authorError"></span>
+        </label>
+        <label for="pages">
+            <div class="top-row">
+                Pages
+                <input type="number" id="pages" required min="1">
+            </div>
+            <span id="pagesError"></span>
+        </label>
+        <label for="status">
+            <div class="top-row">
+                Have you read it?
+                <select name="status" id="status" required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+        </label>
     </form>
     <div class="formButtons">
         <button form="bookForm" type="submit" class="submitForm" id="submit">Add To List</button>

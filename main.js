@@ -123,13 +123,39 @@ class tileButtons {
 
 class BookTiles {
     constructor() {
-        const submitBtn = document.querySelector('.submitForm');
-        submitBtn.addEventListener('click', this);
+        const submitBtn = document.getElementById('bookForm');
+        submitBtn.addEventListener('submit', this);
     }
 
-    formValidate() {
-        alert('test');
-        this.pushToLib()
+    titleValidate() {
+        if (!document.getElementById('title').validity.valid) {
+            document.getElementById('titleError').textContent = 'Enter valid title';
+            this.authorValidate();
+        } else {
+            this.authorValidate();
+        }
+    }
+
+    authorValidate() {
+        if (!document.getElementById('author').validity.valid) {
+            document.getElementById('authorError').textContent = 'Enter valid author';
+            this.pageValidate();
+        } else {
+            this.pageValidate();
+        }
+    }
+
+    pageValidate() {
+        if(!document.getElementById('pages').validity.valid) {
+            document.getElementById('pagesError').textContent = 'Enter valid page';
+        } else if (document.getElementById('title').validity.valid &&
+                    document.getElementById('author').validity.valid &&
+                    document.getElementById('pages').validity.valid) {
+            this.pushToLib();
+            document.getElementById('titleError').textContent = '';
+            document.getElementById('authorError').textContent = '';
+            document.getElementById('pagesError').textContent = '';
+        }
     }
 
     pushToLib = () => {
@@ -141,17 +167,6 @@ class BookTiles {
         let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
         bookUpload.addBook(bookUpload)
         this.parentCard();
-
-        //Throws basic alert if any fields are left blank and creates Book instance
-        // if (bookTitle == '' || 
-        // bookAuthor == '' ||
-        // bookPages == '') {
-        //     alert('Please enter all book info to proceed');
-        // } else {
-        //     let bookUpload = new Book(bookTitle, bookAuthor, bookPages, status);
-        //     bookUpload.addBook(bookUpload)
-        // }
-        // this.parentCard();
     }
 
     parentCard() {
@@ -248,9 +263,9 @@ class BookTiles {
     submitForm() {
         if (document.querySelector('.bookshelf').innerHTML != '') {
             document.querySelector('.bookshelf').innerHTML = '';
-            this.formValidate();
+            this.titleValidate();
         } else {
-            this.formValidate();
+            this.titleValidate();
         }
         document.querySelectorAll('input').forEach(input => input.value = '');
     }
